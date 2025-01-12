@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Made it a card -->
+    <div class="card shadow-lg border-primary form-control">
+        <div class="card-body">
+            <h2 class="fw-bold border-bottom border-dark pb-2 mb-4">Apply For SA Position</h2>
+
+            <form method="POST" action="{{ url_for('user.apply', pos_id=pos.id)  }}">
+                {{ form.hidden_tag() }}
+                <h4 class="text-tertiary fw-bold border-bottom border-dark pb-2 mb-2">{{experience.course.major}} {{experience.course.coursenum}}</h4>
+
+                <div> <b>Has SA experience: </b> {{sa_experience}} </div>
+
+                {% if experience.been_sa %}
+                <div> <b>Has been SA for this course:</b> Yes </div>
+                {% else %}
+                <div> <b>Has been SA for this course:</b> No </div>
+                {% endif %}
+
+                {% if experience.has_taken %}
+                <div> <b>Has taken course:</b> Yes </div>
+                <div> <b>Term taken:</b> {{experience.term_taken}}</div>
+                <div> <b>Grade received:</b> {{experience.grade}}</div>
+                {% else %}
+                <div> <b>Has taken course:</b> No </div>
+                {% endif %}
+                <div> <b>Term applying for:</b> {{pos.course_section.term}} </div>
+                <div> <b>GPA:</b> {{current_user.cum_gpa}} </div>
+
+                <div class="form-group pt-3">
+                    {{ form.submit(class="btn btn-primary") }}
+                    <a href="{{ url_for('user.edit_student_profile', _anchor='courses_card') }}" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

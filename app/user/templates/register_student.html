@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Made it a card -->
+    <div class="card shadow-lg border-primary form-control">
+        <div class="card-body">
+            <h2 class="fw-bold border-bottom border-dark pb-2 mb-4">Student Registration</h2>
+
+            <form method="POST" action="{{ url_for('user.register_student') }}">
+                {{ form.hidden_tag() }}
+                
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    {{ form.username(class="form-control", placeholder="Enter your username") }}
+                    {% if form.username.errors %}
+                        <div class="text-danger">
+                            {% for error in form.username.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    {{ form.email(class="form-control", placeholder="Enter your email") }}
+                    {% if form.email.errors %}
+                        <div class="text-danger">
+                            {% for error in form.email.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="wpi_id" class="form-label">WPI ID</label>
+                    {{ form.wpi_id(class="form-control", placeholder="Enter your WPI ID") }}
+                    {% if form.wpi_id.errors %}
+                        <div class="text-danger">
+                            {% for error in form.wpi_id.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Phone #</label>
+                    {{ form.phone_number(class="form-control", placeholder="Enter your Phone #") }}
+                    {% if form.phone_number.errors %}
+                        <div class="text-danger">
+                            {% for error in form.phone_number.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    {{ form.password(class="form-control", placeholder="Enter your password") }}
+                    {% if form.password.errors %}
+                        <div class="text-danger">
+                            {% for error in form.password.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Confirm Password</label>
+                    {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
+                    {% if form.confirm_password.errors %}
+                        <div class="text-danger">
+                            {% for error in form.confirm_password.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="first_name" class="form-label">First Name</label>
+                    {{ form.first_name(class="form-control", placeholder="Enter your first name") }}
+                    {% if form.first_name.errors %}
+                        <div class="text-danger">
+                            {% for error in form.first_name.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">Last Name</label>
+                    {{ form.last_name(class="form-control", placeholder="Enter your last name") }}
+                    {% if form.last_name.errors %}
+                        <div class="text-danger">
+                            {% for error in form.last_name.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="major" class="form-label">Major</label>
+                    {{ form.major(class="form-control", placeholder="Enter your major") }}
+                    {% if form.major.errors %}
+                        <div class="text-danger">
+                            {% for error in form.major.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="gpa" class="form-label">GPA (Optional)</label>
+                    {{ form.gpa(class="form-control", placeholder="Enter your GPA") }}
+                    {% if form.gpa.errors %}
+                        <div class="text-danger">
+                            {% for error in form.gpa.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="graduation_year" class="form-label">Graduation Year</label>
+                    {{ form.graduation_year(class="form-control", placeholder="Enter your graduation year") }}
+                    {% if form.graduation_year.errors %}
+                        <div class="text-danger">
+                            {% for error in form.graduation_year.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="courses-container">
+                    <h3 class="section-title">Courses Served as SA</h3>
+                    <div class="courses-grid">
+                        {% for course in form.courses_served.query_factory() %}
+                            <div class="course-checkbox" data-course-id="{{ course.id }}">
+                                <label>
+                                    <input type="checkbox" 
+                                           name="courses_served" 
+                                           value="{{ course.id }}"
+                                           {% if course in form.courses_served.data %}checked{% endif %}>
+                                    {{ course.major }} {{ course.coursenum }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="courses-container">
+                    <h3 class="section-title">Courses Taken</h3>
+                    <div class="courses-grid">
+                        {% for course in form.courses_taken.query_factory() %}
+                            <div class="course-checkbox" data-course-id="{{ course.id }}">
+                                <label>
+                                    <input type="checkbox" 
+                                           name="courses_taken" 
+                                           value="{{ course.id }}"
+                                           {% if course in form.courses_taken.data %}checked{% endif %}>
+                                    {{ course.major }} {{ course.coursenum }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    {{ form.submit(class="btn btn-color") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

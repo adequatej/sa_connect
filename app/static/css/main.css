@@ -1,0 +1,164 @@
+input.form-control {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+.some {
+   color:red;
+}
+.text-danger p {
+    color: red;
+    font-size: 0.875rem;
+}
+
+.username {
+    color: red;
+    font-weight: bold;
+}
+
+.card-crimson {
+    border: 2px solid crimson;
+  }
+
+.navbar-text {
+    font-size: 0.9rem;
+    margin-right: 1rem;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.red-background {
+    background-color: #BF3333;
+    color: white; 
+    min-height: 100%;
+}
+
+body.faded-background {
+    background-image: url('https://i.ytimg.com/vi/pzmishrWqiA/maxresdefault.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* for faded background*/
+body.faded-background::before {
+    content: '';
+    position: fixed;  
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: -1;
+}
+
+main.container {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-color {
+    background-color: #BF3333 !important;
+    border-color: #BF3333 !important;
+    color: white!important;
+}
+
+.btn-color:hover {
+    background-color: #A12B2B !important; 
+    border-color: #A12B2B !important;
+}
+
+.btn-color:active {
+    background-color: #8C2323 !important; 
+    border-color: #8C2323 !important;
+}
+
+.red {
+    color: #BF3333;
+}
+
+.white-text {
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto; 
+}
+
+.form-control {
+    width: 100%;  
+    padding: 10px; 
+    margin-bottom: 15px; 
+}
+
+.courses-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.course-checkbox {
+    position: relative;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px 15px;
+    transition: all 0.2s ease;
+}
+
+.course-checkbox:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.course-checkbox input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.course-checkbox.selected {
+    background: #e3f2fd;
+    border-color: #2196f3;
+}
+
+.course-checkbox label {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    cursor: pointer;
+    font-weight: 500;
+    color: #495057;
+}
+
+.section-title {
+    color: black;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e9ecef;
+}

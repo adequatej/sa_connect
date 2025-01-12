@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg border-primary">
+        <div class="card-body">
+            <h2 class="fw-bold border-bottom border-dark pb-2 mb-4">Login</h2>
+
+            <form method="POST" action="{{ url_for('user.login') }}">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username(class="form-control") }}
+                    {% for error in form.username.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control") }}
+                    {% for error in form.password.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="mb-3 form-check">
+                    {{ form.remember_me(class="form-check-input") }}
+                    {{ form.remember_me.label(class="form-check-label") }}
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+
+            <hr class="my-4">
+
+            <!-- Azure SSO Login Button -->
+            <div class="text-center">
+                <p>Or sign in with:</p>
+                <a href="{{ url_for('user.login_azure') }}" class="btn btn-secondary">
+                    Sign in with WPI Account
+                </a>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info mt-3">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="mt-4">
+                <p>Don't have an account yet?</p>
+                <div class="btn-group">
+                    <a href="{{ url_for('user.register_student') }}" class="btn btn-outline-primary">Register as Student</a>
+                    <a href="{{ url_for('user.register_faculty') }}" class="btn btn-outline-primary">Register as Faculty</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

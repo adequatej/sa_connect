@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-lg mb-4 mx-auto p-4" style="max-width: 950px;">
+    <div class="card-body">
+        <h1>Applications for {{ sa_position.course_section.course.major }} {{ sa_position.course_section.course.coursenum }} - Section {{ sa_position.course_section.section_number }}</h1>
+        <p>Position Requirements: Min GPA {{ sa_position.min_gpa }}, Min Grade {{ sa_position.min_grade }}, Prior Experience {{ 'Yes' if sa_position.prior_experience else 'No' }}</p>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Grade</th>
+                        <th style="width: 15%;">Year & Term Taken</th>
+                        <th style="width: 15%;">Year & Term Applying</th>
+                        <th>GPA</th>
+                        <th style="width: 40%;">Recent Grades</th>
+                        <th style="width: 40%;">All SA Experience</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                        <th>Contact Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application, is_already_hired in applications %}
+                    <tr>
+                        <td>{{ application.student.first_name }} {{ application.student.last_name }}</td>
+                        <td>{{ application.grade }}</td>
+                        <td>{{ application.year_term_course }}</td>
+                        <td>{{ application.year_term_apply }}</td>
+                        <td>{{ application.student.cum_gpa }}</td>
+                        <!-- changed bulet points to be prettier design using badges and colorign for courses and grades -->
+                        <td> 
+                            <div class="table-responsive">
+                                <table class="table table-sm table-borderless mb-0">
+                                    <tbody>
+                                        <!--sort to sort alphabetically and numerically -->
+                                        {% for courseGrade in application.student.experiences|sort(attribute='course.major')|sort(attribute='course.coursenum') %}
+                                            {% if courseGrade.has_taken %}
+                                                <tr>
+                                                    <!-- to make the info side by side -->
+                                                    <td style="white-space: nowrap;">
+                                                        <span class="badge bg-light text-dark border">
+                                                            {{ courseGrade.course.major }} {{ courseGrade.course.coursenum }}:
+                                                        </span>
+                                                        <span class="badge {% if courseGrade.grade in ['A', 'A-'] %}bg-success{% elif courseGrade.grade in ['B+', 'B', 'B-'] %}bg-info{% else %}bg-warning{% endif %}">
+                                                            {{ courseGrade.grade }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                        <td> 
+                            <div class="table-responsive">
+                                <table class="table table-sm table-borderless mb-0">
+                                    <tbody>
+                                        <!-- used sort to sort alphabetically and numerically -->
+                                        {% for SAxp in application.student.experiences|sort(attribute='course.major')|sort(attribute='course.coursenum') %}
+                                            {% if SAxp.been_sa %}
+                                                <tr>
+                                                    <td style="white-space: nowrap;">
+                                                        <span class="badge bg-primary">
+                                                            {{ SAxp.course.major }} {{ SAxp.course.coursenum }}
+                                                        </span>
+                                                        <small class="text-muted ms-1">
+                                                            ({{ SAxp.term_taken }})
+                                                        </small>
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                        <td>
+                            {% if is_already_hired %}
+                                <span class="text-danger">Already Hired</span>
+                            {% else %}
+                                <span class="text-success">Available</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if is_already_hired %}
+                                <button class="btn btn-secondary" disabled>Approve</button>
+                            {% else %}
+                                <form method="POST" action="{{ url_for('user.approve_application', app_id=application.id) }}">
+                                    <button type="submit" class="btn btn-primary">Approve</button>
+                                </form>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <!-- Collapsible More Info Section -->
+                            <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#info-{{ application.id }}" aria-expanded="false" aria-controls="info-{{ application.id }}">
+                                Contact
+                            </button>
+                            <div class="collapse mt-2" id="info-{{ application.id }}">
+                                <div class="card card-body">
+                                    <p><strong>WPI ID:</strong> {{ application.student.wpi_id }}</p>
+                                    <p><strong>Email:</strong> {{ application.student.email }}</p>
+                                    <p><strong>Phone:</strong> {{ application.student.phone_number }}</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if not applications %}
+                <p>No applications have been submitted for this position.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

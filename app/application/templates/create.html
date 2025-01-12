@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Made it a card -->
+    <div class="card shadow-lg border-primary form-control">
+        <div class="card-body">
+            <h2 class="fw-bold border-bottom border-dark pb-2 mb-4">Create SA Position</h2>
+
+            <form method="POST" action="{{ url_for('user.create_sa_position') }}">
+                {{ form.hidden_tag() }}
+
+                <div>
+                    <label for="course_section">{{ form.course_section.label }}</label>
+                    {{ form.course_section(class="form-control") }}
+                </div>
+
+                <div>
+                    <label for="number_of_sas">{{ form.number_of_sas.label }}</label>
+                    {{ form.number_of_sas(class="form-control") }}
+                </div>
+
+                <div>
+                    <label for="min_gpa">{{ form.min_gpa.label }}</label>
+                    {{ form.min_gpa(class="form-control") }}
+                </div>
+
+                <div>
+                    <label for="min_grade">{{ form.min_grade.label }}</label>
+                    {{ form.min_grade(class="form-control") }}
+                </div>
+
+                <div>
+                    <label for="prior_experience">{{ form.prior_experience.label }}</label>
+                    {{ form.prior_experience() }}
+                </div>
+                <br>
+                <div>
+                    <button type="submit" class="btn btn-color">
+                        {{ form.submit.label }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

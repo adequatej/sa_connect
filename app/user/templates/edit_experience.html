@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="fw-bold border-bottom border-dark pb-2 mb-4">{{ course.major }} {{ course.coursenum }}</h2>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <!-- Made it a card -->
+        <div class="card shadow-lg border-primary form-control">
+            <div class="card-body">
+
+                <div class="mb-3">
+                    {{ form.been_sa.label }} 
+                    {{ form.been_sa() }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.has_taken.label }} 
+                    {{ form.has_taken() }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.grade.label }} 
+                    {{ form.grade(class="form-control") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.term_taken.label }} 
+                    {{ form.term_taken(class="form-control") }}
+                </div>
+
+                <button type="submit" class="btn btn-color">{{ form.submit.label }}</button>
+                
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

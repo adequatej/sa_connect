@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Edit Faculty Profile{% endblock %}
+{% block content %}
+<div class="container">
+    <!-- Made it a card -->
+    <div class="card shadow-lg border-primary form-control">
+        <div class="card-body">
+            <h2 class="fw-bold border-bottom border-dark pb-2 mb-4">Edit Faculty Profile</h2>
+
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.first_name.label }} {{ form.first_name(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.last_name.label }} {{ form.last_name(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.email.label }} {{ form.email(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.phone_number.label }} {{ form.phone_number(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.department.label }} {{ form.department(class="form-control") }}
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-color">
+                        {{ form.submit.label }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

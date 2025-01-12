@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sandstone.min.css') }}">
+</head>
+<!-- image background if not authenticated, red background if authenticated-->
+<body class="{{ 'faded-background' if not current_user.is_authenticated else 'red-background' }}">
+    <!-- No nav bar for home index page, but for everything else-->
+    {% if current_user.is_authenticated or request.endpoint in ['user.login', 'user.register_student', 'user.register_faculty'] %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url_for('user.index') }}">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        {% if current_user.is_authenticated %}
+                            <li class="nav-item">
+                                <span class="badge bg-info me-2">
+                                    {% if is_faculty %}Faculty{% else %}Student{% endif %}
+                                </span>
+                                <span class="navbar-text">
+                                    {% if is_faculty %}
+                                        Welcome, Instructor <span class="username">{{ current_user.last_name }}</span>!
+                                    {% else %}
+                                        Welcome, <span class="username">{{ current_user.first_name }}</span>!
+                                    {% endif %}
+                                </span>
+                            </li>
+    
+                            {% if is_faculty %}
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('course.createclass') }}">Create Class</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('user.create_sa_position') }}">Create SA Position</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('user.edit_faculty_profile') }}">Edit Profile</a></li>
+                            {% else %}
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('user.edit_student_profile') }}">Edit Profile</a></li>
+                            {% endif %}
+    
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('user.logout') }}">Logout</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('user.login_azure') }}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('user.register_student') }}">Student Registration</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('user.register_faculty') }}">Faculty Registration</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% endif %}
+ 
+<main class="container mt-5">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category if category != 'message' else 'info' }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

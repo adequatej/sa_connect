@@ -1,0 +1,48 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - iteration3
+  pull_request:
+    branches:
+      - iteration3
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Set up Python
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.12'
+
+    # Install dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # Run pytest for routes
+    - name: Run pytest for routes
+      run: |
+        python -m pytest -v tests/test_routes.py
+
+    # Run unittest for models
+    - name: Run unittest for models
+      run: |
+        python -m unittest -v tests/test_models.py
+
+    # # Run Selenium tests
+    # - name: Run Selenium tests
+    #   run: |
+    #     python -m pytest -v tests/test_selenium.py
+
+    

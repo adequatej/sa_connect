@@ -1,0 +1,18 @@
+name: Sending message to group
+
+on:
+  push:
+    branches: [iteration3]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Discord Notification
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"A new commit was pushed to the iteration3 branch by @${{ github.actor }}. :smile: \"}" \
+          $DISCORD_WEBHOOK_URL
