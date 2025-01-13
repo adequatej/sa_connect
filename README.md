@@ -1,29 +1,22 @@
-### SA Connect: Student Assistant Recruitment System
+# SA Connect: Student Assistant Recruitment System
 This is the SA Connect application, designed to streamline the student assistant (SA) recruitment process for the WPI Computer Science Department. 
 It allows students to apply for available SA positions, and enables faculty to create positions and review applications.
 
-
-### Contributers
-* John/Jed Geoghegan
-* Julian Kreis
-* Jacob Lu
-* Harleen Kaur
-
-### Installation Instructions
+# Installation Instructions
 To set up this application on your local machine, follow these steps:
 
-# 1. Clone the repository:
+### 1. Clone the repository:
 git clone https://github.com/<your-username>/sa-connect.git
 cd sa-connect
 
-# 2. Set up a virtual environment (Optional but recommended): If you're using Python 3, create and activate a virtual environment:
+### 2. Set up a virtual environment (Optional but recommended): If you're using Python 3, create and activate a virtual environment:
 python -m venv venv
 venv\Scripts\activate
 
-# 3. Install the dependencies:
+### 3. Install the dependencies:
 pip install -r requirements.txt
 
-# 4. Set up your .env file:
+### 4. Set up your .env file:
 Create a .env file in the root of the project directory and add the following configurations:
 
 - Microsoft Authentication Configurations
@@ -45,8 +38,7 @@ AWS EC2 Database (Production): If deploying on AWS EC2 with AWS RDS, set the AWS
 Local Database (Development): If running the app locally, the DATABASE_URL will be used to connect to your local PostgreSQL database.
 Microsoft Graph API Endpoint: The ENDPOINT is used for fetching user details from Microsoft Graph API.
 
-
-# 5. Database Setup:
+### 5. Database Setup:
 The application is configured to work with AWS RDS for production environments and SQLite for local development.
 
 - AWS RDS:
@@ -57,7 +49,7 @@ The application is configured to work with AWS RDS for production environments a
 - Local Database:
   For local development, the app will connect to a local PostgreSQL database using the DATABASE_URL from the .env file.
 
-# 6. Docker Setup:
+### 6. Docker Setup:
 The application can be easily deployed using Docker for both development and production environments.
 
 Steps to run the application using Docker:
@@ -69,16 +61,14 @@ Steps to run the application using Docker:
 This will start the application inside a Docker container, and you can access it at http://localhost:5000.
 Note: Make sure that your AWS RDS connection is properly configured when running in Docker for production environments
 
-
-# 7. AWS EC2 Deployment:
+### 7. AWS EC2 Deployment:
 To deploy the application to AWS EC2:
 - Set up an EC2 instance (e.g., Ubuntu-based instance).
 - SSH into the EC2 instance and clone the repository:
 - If you're using AWS RDS, make sure to configure the config.py file with the appropriate RDS connection string.
 - Start the Flask application for production use.
 
-
-### Running the Application
+# Running the Application
 To start the application locally, run:
 - flask run
 
