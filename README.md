@@ -1,6 +1,36 @@
 # SA Connect: Student Assistant Recruitment System
 This is the SA Connect application, designed to streamline the student assistant (SA) recruitment process for the WPI Computer Science Department. It allows students to apply for available SA positions, and enables faculty to create positions and review applications.
 
+# Features:
+1. **Student Portal**  
+   - Allows students to browse available SA positions in the Computer Science Department 
+   - Enables students to submit applications directly for desired positions
+   - Tracks the application status in real-time  
+
+2. **Faculty Portal**  
+   - Enables faculty to create and manage SA position postings 
+   - Provides a dashboard to review, approve, or reject applications  
+   - Allows customization of application criteria for each position  
+
+3. **Authentication and Authorization**  
+   - Integrates Microsoft Azure Active Directory for secure login and authentication  
+   - Role-based access control for students and faculty  
+
+4. **Database Integration**  
+   - Supports local PostgreSQL for development environments  
+   - Fully compatible with AWS RDS for production-grade database management  
+
+5. **API Integration**  
+   - Integrates Microsoft Graph API for accessing user details  
+
+6. **Dockerized Deployment**  
+   - Offers a Docker setup for seamless local and production deployments  
+   - Simplifies running the application in isolated containers  
+
+7. **AWS EC2 Support**  
+   - Optimized for deployment on AWS EC2 instances  
+   - Configured to work with AWS RDS for production-ready database management  
+
 # Installation Instructions
 To set up this application on your local machine, follow these steps:
 
