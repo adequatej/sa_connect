@@ -32,10 +32,10 @@ Create a .env file in the root of the project directory and add the following co
 ### Microsoft Graph API Endpoint
   - `ENDPOINT=https://graph.microsoft.com/v1.0/me`
 
-- **Microsoft Authentication Configurations**: These values are necessary for integrating Microsoft Authentication (e.g., login) using Azure AD.
-- **AWS EC2 Database (Production)**: If deploying on AWS EC2 with AWS RDS, set the `AWS_EC2` value to the connection string for your PostgreSQL RDS instance.
-- **Local Database (Development)**: If running the app locally, the `DATABASE_URL` will be used to connect to your local PostgreSQL database.
-- **Microsoft Graph API Endpoint**: The `ENDPOINT` is used for fetching user details from Microsoft Graph API.
+**Microsoft Authentication Configurations**: These values are necessary for integrating Microsoft Authentication (e.g., login) using Azure AD.
+**AWS EC2 Database (Production)**: If deploying on AWS EC2 with AWS RDS, set the `AWS_EC2` value to the connection string for your PostgreSQL RDS instance.
+**Local Database (Development)**: If running the app locally, the `DATABASE_URL` will be used to connect to your local PostgreSQL database.
+**Microsoft Graph API Endpoint**: The `ENDPOINT` is used for fetching user details from Microsoft Graph API.
 
 ### 5. Database Setup:
 The application is configured to work with AWS RDS for production environments and SQLite for local development.
