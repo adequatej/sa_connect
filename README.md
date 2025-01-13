@@ -21,7 +21,7 @@ Create a .env file in the root of the project directory and add the following co
 
 - Microsoft Authentication Configurations
   AUTHORITY=https://login.microsoftonline.com/<tenant-id>
-  CLIENT_ID=<your-client-id>
+  CLIENT_ID=<your-client-id>             
 
 - Database Connection Configurations
   - AWS EC2 (Production)
