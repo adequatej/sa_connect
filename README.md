@@ -19,9 +19,9 @@ To set up this application on your local machine, follow these steps:
 ### 4. Set up your .env file:
 Create a .env file in the root of the project directory and add the following configurations:
 
-- Microsoft Authentication Configurations
-  - AUTHORITY=https://login.microsoftonline.com/<tenant-id>
-  - CLIENT_ID='<your-client-id>'  
+### Microsoft Authentication Configurations
+- **AUTHORITY**: `https://login.microsoftonline.com/<tenant-id>`
+- **CLIENT_ID**: `<your-client-id>` 
 
 - Database Connection Configurations
   - AWS EC2 (Production)
